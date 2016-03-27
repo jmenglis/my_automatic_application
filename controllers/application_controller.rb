@@ -12,9 +12,25 @@ class ApplicationController < Sinatra::Base
     config.access_token_secret = ENV["ACCESS_TOKEN_SECRET"]
   end
 
+
+
   get '/dm' do
     client.create_direct_message('joshenglish','Thank you for following @redothecube.  Please follow my journey through code bootcamp and launching my business at redothecube.com/code.  You can sign up to receive the email updates.  I promise not to spam you.')
   end
+
+  get '/test' do
+    User.create userid: 100, sent_date: nil
+    "Added to DB"
+  end
+
+
+  get '/users' do
+    result = client.follower_ids("redothecube")
+    result.attrs[:ids].each do |item|
+      User.create userid: item, sent_date: nil
+    end
+    "Completed the Addition"
+  end
 end
 
-get '/users' do
+

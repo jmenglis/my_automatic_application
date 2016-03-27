@@ -1,10 +1,10 @@
 require 'bundler'
 Bundler.require
 
-#DB = Sequel.connect('<enter database here>')
+DB = Sequel.connect('postgres://localhost:5432/twitter')
 
 # Adding Models
-
+require './models/user'
 # Adding Controllers
 require './controllers/application_controller'
 # Mapping Routes to Classes
