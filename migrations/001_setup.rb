@@ -1,9 +1,9 @@
 Sequel.migration do
   change do
-    create_table(:twitterusers) do
+    create_table(:users) do
       primary_key :id
-      String :userid
-      Date :sent_date
+      Bignum :userid, :null=>false, :unique=>true
+      TrueClass :sent_message
     end
   end
 end
