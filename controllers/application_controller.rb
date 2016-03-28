@@ -14,6 +14,7 @@ class ApplicationController < Sinatra::Base
 
   get '/showme' do
     @new_user = User.all
+    @new_user
   end
 
   get '/dm' do
@@ -25,7 +26,7 @@ class ApplicationController < Sinatra::Base
       client.create_direct_message(@new_user.userid,'Hello! Thanks for following @redothecube.  Please follow my journey as I complete a coding bootcamp in preparation of launching my own business.  You can sign up to receive the vlog updates and I promise not to spam you!  Goto redothecube.com/code')
       p "#{@new_user.userid} received a Direct Message"
       p "----------------------"
-      p "Sleeping for 30 seconds"
+      p "Sleeping for 60 seconds"
       sleep(60)
       p "The system is continuing the process"
       @new_user.sent_message = 1
