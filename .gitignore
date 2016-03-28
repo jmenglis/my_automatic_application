@@ -1,4 +1,5 @@
 .env
+*.Ulysses-Group.plist
 
 *.gem
 *.rbc
