@@ -17,6 +17,7 @@ class ApplicationController < Sinatra::Base
     @new_user
   end
 
+  # sending DMs automatically to users
   get '/dm' do
     @users_all = User.where(:sent_message=>'false').map{|x| x.userid}
     i = 0;
@@ -36,6 +37,7 @@ class ApplicationController < Sinatra::Base
     "Job is complete"
   end
 
+  # Get Userslist for the game
   get '/users' do
     @result = client.follower_ids("redothecube")
     @stage_array = @result.attrs[:ids]
