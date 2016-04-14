@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'sinatra', '~> 1.4', '>= 1.4.7', require: 'sinatra/base'
 gem 'rerun', '~> 0.11.0'
-# gem 'json', '~> 1.8', '>= 1.8.3'
+gem 'json', '~> 1.8', '>= 1.8.3'
 gem 'thin', '~> 1.6', '>= 1.6.4'
 gem 'sequel', '~> 4.32'
 gem 'pg', '~> 0.18.4'

@@ -12,19 +12,35 @@ class ApplicationController < Sinatra::Base
     config.access_token_secret = ENV["ACCESS_TOKEN_SECRET"]
   end
 
-  get '/showme' do
-    @new_user = User.all
-    @new_user
+
+  get '/' do
+    erb :main
   end
 
+  post '/testdm' do
+      # p "----------------------"
+      client.create_direct_message(16246055, request.body.read)
+      # p "#{@new_user.userid} received a Direct Message"
+      # p "----------------------"
+      # p "Sleeping for 60 seconds"
+      # sleep(60)
+      # p "The system is continuing the process"
+      @completed = []
+      @completed.push({message: "The system has completed sending DMs to all new followers"})
+      @completed.to_json
+  end
+
+
+
   # sending DMs automatically to users
-  get '/dm' do
+  post '/dm' do
     @users_all = User.where(:sent_message=>'false').map{|x| x.userid}
-    i = 0;
+    @my_message = request.body.read
+    i = 0
     while i < @users_all.length do
       @new_user = User[:sent_message=> false]
       p "----------------------"
-      client.create_direct_message(@new_user.userid,'Hello! Thanks for following @redothecube.  Please follow my journey as I complete a coding bootcamp in preparation of launching my own business.  You can sign up to receive the vlog updates and I promise not to spam you!  Goto redothecube.com/code')
+      client.create_direct_message(@new_user.userid, @my_message)
       p "#{@new_user.userid} received a Direct Message"
       p "----------------------"
       p "Sleeping for 60 seconds"
@@ -34,7 +50,9 @@ class ApplicationController < Sinatra::Base
       @new_user.save
       i += 1
     end
-    "Job is complete"
+    @completed = []
+    @completed.push({message: "The system has completed sending DMs to all new followers"})
+    @completed.to_json
   end
 
   # Get Userslist for the game
